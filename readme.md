@@ -3,9 +3,13 @@
 ___
 
 ## News
+4/2/2024
+
+* Our code is updated, i.e., fixing the scripts for BERT-based models.
+
 6/3/2023
 
-* Our paper has been accepted by IEEE Transactions on Knowledge and Data Engineering. [(Early Access Paper)](https://ieeexplore.ieee.org/document/10056277)
+* Our paper has been accepted by IEEE Transactions on Knowledge and Data Engineering. [(Paper)](https://ieeexplore.ieee.org/document/10056277)
 
 26/4/2022
 
@@ -57,8 +61,13 @@ More training options can be found in "./main_total.py".
 
 #### training based on GloVe: 
 
-* python ./main.py   -ds_name 14semeval_laptop   -bs 32   -learning_rate 0.001   -n_epoch 20   -model KGNN -dim_w 300 -dim_k 400  -is_test 0   -is_bert 0
-* python ./main.py   -ds_name 14semeval_rest   -bs 64   -learning_rate 0.001   -n_epoch 20   -model KGNN -dim_w 300 -dim_k 200  -is_test 0   -is_bert 0
+* python -m main_total -ds_name 14semeval_laptop -bs 32 -learning_rate 0.001 -dropout_rate 0.5 -n_epoch 20 -model KGNN -dim_w 300 -dim_k 400 -kge analogy  -gcn 0  -is_test 0 -is_bert 0
+* python -m main_total -ds_name 14semeval_rest -bs 64 -learning_rate 0.001 -dropout_rate 0.5 -n_epoch 20 -model KGNN -dim_w 300 -dim_k 200 -kge distmult -gcn 0 -is_test 0 -is_bert 0
+
+#### training based on BERT: 
+
+* python -m main_total -ds_name 14semeval_laptop -bs 32 -learning_rate 0.00003 -n_epoch 20 -model KGNN -dim_w 768 -dim_k 400 -kge analogy -gcn 0  -is_test 0 -is_bert 1
+* python -m main_total -ds_name 14semeval_rest -bs 64 -learning_rate 0.00003 -n_epoch 20 -model KGNN -dim_w 768 -dim_k 200 -kge distmult -gcn 0 -is_test 0 -is_bert 1
 
 The detailed training scripts can be found in "./scripts".
 
@@ -66,12 +75,12 @@ The detailed training scripts can be found in "./scripts".
 
 To have a quick look, we saved the best model weight trained on the evaluated datasets in the "./model_weight/best_model_weight". You can easily load them and test the performance. You can evaluate the model weight with:
 
-- python ./main.py   -ds_name 14semeval_laptop   -bs 32  -model KGNN -dim_w 300 -dim_k 400 -is_test 1 
-- python ./main.py   -ds_name 14semeval_rest   -bs 64  -model KGNN -dim_w 300 -dim_k 200 -is_test 1 
+- python -m main_total -ds_name 14semeval_laptop   -bs 32  -model KGNN -dim_w 300 -dim_k 400 -is_test 1 
+- python -m main_total -ds_name 14semeval_rest   -bs 64  -model KGNN -dim_w 300 -dim_k 200 -is_test 1 
 
 ## Notes
 
-- The datasets and more than 50% of the code are borrowed from TNet-ATT (Tang et.al, ACL2019).
+- The datasets and more than 50% of the code are borrowed from TNet-ATT [(Code)](https://github.com/DeepLearnXMU/PSSAttention) (Tang et.al, ACL2019).
 
 ## Citation
 ```
